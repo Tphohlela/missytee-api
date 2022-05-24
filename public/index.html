@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Missy Tee - clothing store</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="style" href="stylesheet.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Missy Tee - clothing store</h1>
+        <!-- snackbar -->
+        <div class="add button mt1">
+            <a href="" onclick="myFunction">Add garmet</a>
+
+        </div>
+
+        <!-- snackbar -->
+        <div class="filter" x-data="{garments : []}" x-init="fetch('api/garments')
+        .then(r => r.json())
+        .then(garmentsData => garments = garmentsData ),console.log('hh is a hun'+JSON.stringify(garments))">
+            <h2>Filter</h2>
+            <div class="genders">
+                <label>
+                    <input type="radio" name="gender" value="All" @click="fetch('/api/garments?gender=&season=')
+                    .then(r => r.json())
+                    .then(garmentsData => garments = garmentsData )"> All
+                </label>
+                <!-- <template x-for="garment in garments">
+
+
+                    <div class="">
+
+                        <img x-bind:src="`/images/${garment.img}`">
+                        <p x-text="garment.description"></p>
+                        <p>R<span x-text="garment.price"></span></p>
+
+                    </div>
+                </template> -->
+
+                <label>
+                    <input type="radio" name="gender" value="Male"
+                        @click="fetch('/api/garments?gender=Male')
+                    .then(r => r.json())
+                    .then(garmentsData => garments = garmentsData), console.log('tt is a hun'+JSON.stringify(garments.data))"> Male
+                </label>
+
+
+                <label>
+                    <input type="radio" name="gender" value="Female"
+                        @click="fetch('/api/garments?gender=Female')
+                    .then(r => r.json())
+                    .then(garmentsData => garments = garmentsData), console.log('tt is a hun'+JSON.stringify(garments.data))"> Female
+                </label>
+                <label>
+                    <input type="radio" name="gender" value="Unisex"
+                        @click="fetch('/api/garments?gender=Unisex')
+                    .then(r => r.json())
+                    .then(garmentsData => garments = garmentsData), console.log('tt is a hun'+JSON.stringify(garments.data))"> Unisex
+                </label>
+            </div>
+            <div class="seasons">
+
+                <label>
+                    <input type="radio" name="season" value="All"
+                        @click="fetch('/api/garments')
+                    .then(r => r.json())
+                    .then(garmentsData => garments = garmentsData), console.log('tt is a hun'+JSON.stringify(garments.data))"> All
+                </label>
+                <label>
+                    <input type="radio" name="season" value="Summer"
+                        @click="fetch('/api/garments?season=Summer')
+                    .then(r => r.json())
+                    .then(garmentsData => garments = garmentsData), console.log('tt is a hun'+JSON.stringify(garments.data))"> Summer
+                </label>
+                <label>
+                    <input type="radio" name="season" value="Winter"
+                        @click="fetch('/api/garments?season=Winter')
+                    .then(r => r.json())
+                    .then(garmentsData => garments = garmentsData), console.log('tt is a hun'+JSON.stringify(garments.data))"> Winter
+                </label>
+                <label>
+                    <input type="radio" name="season" value="All Seasons"
+                        @click="fetch('/api/garments?season=')
+                    .then(r => r.json())
+                    .then(garmentsData => garments = garmentsData), console.log('tt is a hun'+JSON.stringify(garments.data))"> All seasons
+                </label>
+            </div>
+            <div>
+                Filter by price range:
+                <input type="range" nahereme="priceRange" max="1000" step="50" class="priceRange" value="0"> R
+                <span class="showPriceRange">0</span>.00
+            </div>
+            <div class="garments">
+                <template x-for="garment in garments.data">
+
+                    <div class="garment">
+
+                        <img x-bind:src="`/images/${garment.img}`">
+                        <p x-text="garment.description"></p>
+                        <p>R<span x-text="garment.price"></span></p>
+
+                    </div>
+                </template>
+            </div>
+        </div>
+
+        <div class="message hidden">
+
+        </div>
+
+        <div class="addGarment">
+
+            <div class="add button mt1 hidden">
+                <a href="">Add garmet</a>
+            </div>
+
+            <div class="add garment hidden">
+                <h2>Add garment</h2>
+                <img src="/images/{{img}}" alt="">
+
+                <!-- <form action="/garment/" method="post" class="addGarmentForm" > -->
+
+                <div class="field">
+                    <label for="">Description</label>
+                    <input type="text" name="description" class="description">
+                </div>
+                <div class="field">
+                    <label for="">Image</label>
+                    <input type="text" name="img" class="img">
+                </div>
+                <div class="field">
+                    <label for="">Price</label>
+                    <input type="number" name="price" step="0.01" class="price">
+                </div>
+                <div class="field">
+                    <label for="">Gender</label>
+                    <div>
+                        <input type="text" name="gender" class="gender">
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="">Season</label>
+                    <div>
+                        <input type="text" name="season" class="season">
+                    </div>
+                </div>
+                <div class="mt1">
+                    <input type="button" name="action" value="Add" class="addGarmentBtn">
+                    <input type="button" name="action" value="Hide" class="hideAddGarmetBtn">
+                </div>
+                <!-- </form> -->
+            </div>
+
+        </div>
+        <div>
+            <!-- <div x-data="clothing">
+                <h2>Garments</h2>
+
+                <div class="garments">
+                    <template x-for="garment in garments">
+
+                        <div class="garment">
+
+                            <img :src="`/images/${garment.img}`" alt="photo">
+                            <p x-text="garment.description"></p>
+                            <p x-text="garment.price"></p>
+
+                        </div>
+                    </template>
+
+                </div>
+            </div> -->
+        </div>
+    </div>
+    </div>
+
+    <div id='snackbar'>
+
+    </div>
+    <script src="missytee.js"></script>
+    <!-- <script src="app.js"></script>
+    <script src="field-manager.js"></script>
+    <script src="add-garment.js"></script> -->
+
+</body>
+
+</html>
