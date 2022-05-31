@@ -68,6 +68,17 @@ describe('The Garment API', function () {
 		assert.equal(5, garments.length);
 	});
 
+	// it('should be able to find items less than maxPrice', async () => {
+	// 	// add some code below
+
+	// 	const response = await supertest(app)
+	// 		.get('/api/garments/price/350')
+	// 		.expect(200);
+
+	// 	const garments = response.body.data;
+	// 	assert.equal(5, garments.length);
+	// });
+
 	it('should be able to find all the Winter Male garments', async () => {
 		// change the code statement below
 

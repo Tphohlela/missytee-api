@@ -148,4 +148,25 @@ module.exports = function (app, db) {
 		}
 	});
 
+	app.get('/api/garments/price/:price', async function(req, res) {
+	try {
+		let result = []
+		
+		const maxPrice = Number(req.params.price);
+
+		result = await db.manyOrNone("select * from garment where price < $1",[maxPrice])
+	
+		res.json({
+			data: result
+		})
+	} catch (err) {
+		console.log(err);
+			res.json({
+				status: 'error',
+				error: err.message
+			})
+	}
+	});
+
+
 }
