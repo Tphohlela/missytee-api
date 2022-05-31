@@ -13,8 +13,8 @@ app.use(express.static('public'));
 const config = {
     connectionString: process.env.DATABASE_URL || 'postgres://gary:gar123@localhost:5432/garment_app',
     max: 30,
-    // ssl: { rejectUnauthorized: false }
-    ssl: process.env.DATABASE_URL ? true : false
+    ssl: { rejectUnauthorized: false }
+    // ssl: process.env.DATABASE_URL ? true : false
 };
 
 const pgp = PgPromise({});
