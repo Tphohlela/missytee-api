@@ -90,6 +90,8 @@ module.exports = function (app, db) {
 		try {
 
 			const { description, price, img, season, gender } = req.body;
+			console.log(description);
+
 			let garment = [];
 
 			// insert a new garment in the database
